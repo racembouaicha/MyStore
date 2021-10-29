@@ -9,10 +9,21 @@ import { AuthService } from '../Services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private sa:AuthService) { }
+  messageError=''
+  constructor(private sa:AuthService,private route:Router) { }
 
   ngOnInit(): void {
   }
 
+  login(f:any){
+    let data=f.value
+    this.sa.singIn(data.email,data.password)
+    .then(()=>{alert("Login Done")
+    this.route.navigate(['/'])
+  })
+    .catch(()=>{
+     // alert("error")
+      this.messageError='incorrect Email or Password'
+  })
+  }
 }

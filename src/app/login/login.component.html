@@ -1,22 +1,26 @@
 <div class="uk-position-center uk-overlay uk-overlay-default">
     <h1 class="text-center">Log In</h1>
-    <form>
+    <form #f="ngForm" (ngSubmit)="login(f)">
 
         <div class="uk-margin">
             <div class="uk-inline">
+                <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
                 <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                <input class="uk-input" type="email" placeholder="E-mail">
+                <input class="uk-input" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
             </div>
         </div>
 
         <div class="uk-margin">
             <div class="uk-inline">
+                <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                <input class="uk-input" type="password" placeholder="Password">
+                <input class="uk-input" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
             </div>
         </div>
-
+        <button type="submit" class="btn btn-success" style="width: 100%;">Login</button>
+        <div class="alert alert-danger" *ngIf="messageError">{{messageError}}</div>
+        <p class="text-center">Forget <a href="#">password ?</a></p>
     </form>
-    <button class="btn btn-success" style="width: 100%;">Login</button>
-    <p class="text-center">Forget <a href="#">password ?</a></p>
+
+
 </div>

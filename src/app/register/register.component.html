@@ -1,35 +1,39 @@
 <div class="uk-position-center uk-overlay uk-overlay-default">
     <h1 class="text-center">Register</h1>
-    <form>
+    <form #f="ngForm" (ngSubmit)="register(f)">
         <div class="uk-margin">
             <div class="uk-inline">
+                <p class="alert alert-danger" *ngIf="Username.errors?.required && Username.touched">Please Enter your Username</p>
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
-                <input class="uk-input" type="text" placeholder="Username">
+                <input class="uk-input" type="text" placeholder="Username" name="Username" #Username="ngModel" ngModel required>
             </div>
         </div>
 
         <div class="uk-margin">
             <div class="uk-inline">
+                <p class="alert alert-danger" *ngIf="Bio.errors?.required && Bio.touched">Please Enter your Bio</p>
                 <span class="uk-form-icon" uk-icon="icon:  file-edit"></span>
-                <textarea class="uk-input" placeholder="Bio" cols="23" rows="10"></textarea>
+                <textarea class="uk-input" placeholder="Bio" cols="23" rows="10" name="Bio" #Bio="ngModel" ngModel required></textarea>
             </div>
         </div>
 
         <div class="uk-margin">
             <div class="uk-inline">
+                <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: mail"></span>
-                <input class="uk-input" type="email" placeholder="E-mail">
+                <input class="uk-input" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
             </div>
         </div>
 
         <div class="uk-margin">
             <div class="uk-inline">
+                <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
                 <span class="uk-form-icon " uk-icon="icon: lock"></span>
-                <input class="uk-input" type="password" placeholder="Password">
+                <input class="uk-input" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
             </div>
         </div>
+        <button class="btn btn-success" type="submit" style="width: 100%;">Register</button>
 
     </form>
-    <button class="btn btn-success" style="width: 100%;">Register</button>
 
 </div>
