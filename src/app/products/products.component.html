@@ -2,7 +2,9 @@
 <br>
 <div class="container">
     <h2 style="text-align: center;">All Products</h2>
-
+    <button type="button" class="btn btn-primary" style="float: right;" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product</button>
+    <br>
+    <br>
     <div class="row">
         <div class="col col12 col-md-6 col-lg-3">
             <div class="card" style="width: 18rem;">
@@ -70,5 +72,39 @@
             </div>
         </div>
     </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form #f="ngForm" (ngSubmit)="addProduct(f)">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="title" #title="ngModel" ngModel placeholder="Title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Discription</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="discription" #discription="ngModel" ngModel placeholder="Discription"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="image" #image="ngModel" ngModel placeholder="URL de l'image">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-success" *ngIf="successMessage">{{successMessage}}</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
