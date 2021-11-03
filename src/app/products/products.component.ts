@@ -10,23 +10,25 @@ import { AuthService } from '../Services/auth.service';
 export class ProductsComponent implements OnInit {
     Uid: string
     successMessage=''
+    dataArray: any;
   constructor( private fs:AngularFirestore,private as:AuthService) {
     this.as.user.subscribe(user=>{
       this.Uid=user.uid
     })
    }
 
-  ngOnInit(): void {
-  }
-  addProduct(f:any){
-    let data=f.value
-    this.fs.collection("products").doc(this.Uid).set({
-      title:data.title,
-      discription:data.discription,
-      image:data.image,
-      uid:this.Uid,
-    }).then(()=>{
-      this.successMessage="Added"
+   ngOnInit(): void {
+    this.fs.collection("products").snapshotChanges().subscribe((data:any)=>{
+     this.dataArray= data.map((element: { payload: { doc: { id: any; data: () => { (): any; new(): any;[x: string]: any; }; }; }; })=>{
+        return{
+          id:element.payload.doc.id,
+          title:element.payload.doc.data()['title'],
+          discription:element.payload.doc.data()['discription'],
+          image:element.payload.doc.data()['image'],
+          uid:this.Uid
+        }
+      })
     })
   }
+
 }
