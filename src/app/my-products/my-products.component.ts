@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/auth.service';
 
 @Component({
@@ -7,18 +8,21 @@ import { AuthService } from '../Services/auth.service';
   templateUrl: './my-products.component.html',
   styleUrls: ['./my-products.component.css']
 })
-export class MyProductsComponent implements OnInit {
+export class MyProductsComponent implements OnInit ,OnDestroy {
     Uid: string
     successMessage=''
     dataArray:any
+    percentages: any;
+    getProducts:Subscription
   constructor( private fs:AngularFirestore,private as:AuthService) {
     this.as.user.subscribe(user=>{
       this.Uid=user.uid
     })
    }
+ 
 
   ngOnInit(): void {
-    this.fs.collection("products").snapshotChanges().subscribe((data:any)=>{
+   this.getProducts= this.fs.collection("products").snapshotChanges().subscribe((data:any)=>{
      this.dataArray= data.map((element: { payload: { doc: { id: any; data: () => { (): any; new(): any;[x: string]: any; }; }; }; })=>{
         return{
           id:element.payload.doc.id,
@@ -38,7 +42,16 @@ export class MyProductsComponent implements OnInit {
       image:data.image,
       uid:this.Uid,
     }).then(()=>{
-      this.successMessage="Added"
+      this.successMessage="Added !"
     })
   }
+
+
+  delete(id:any){
+    this.fs.collection("products").doc(id).delete()
+  }
+  ngOnDestroy(): void {
+    this.getProducts.unsubscribe()
+  }
+  
 }

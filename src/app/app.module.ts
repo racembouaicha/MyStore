@@ -15,6 +15,11 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductsComponent } from './products/products.component';
 import { MyProductsComponent } from './my-products/my-products.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DetailsProductComponent } from './details-product/details-product.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +30,9 @@ import { MyProductsComponent } from './my-products/my-products.component';
     HomeComponent,
     ProfileComponent,
     ProductsComponent,
-    MyProductsComponent
+    MyProductsComponent,
+    DetailsProductComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,9 @@ import { MyProductsComponent } from './my-products/my-products.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

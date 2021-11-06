@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 
-import { analytics } from 'firebase';
+
 import { AuthService } from '../Services/auth.service';
 
 @Component({
@@ -11,35 +12,53 @@ import { AuthService } from '../Services/auth.service';
 })
 export class ProfileComponent implements OnInit {
   Uid :any
-  dataProfile:any
-  constructor(private as:AuthService,private fs:AngularFirestore) {
+  succesMessage=''
+  dataProfile ={
+    Username:'',
+    image:'',
+    Bio:'',
+    uid:'',
+  }
+  task:AngularFireUploadTask
+  ref:AngularFireStorageReference
+  percentages: any;
+  constructor(private as:AuthService,private fs:AngularFirestore,private fst:AngularFireStorage) {
     this.as.user.subscribe((user:any)=>{
       this.Uid=user.uid
     })
    }
 
-  ngOnInit(): void {
-    this.fs.collection("users").snapshotChanges().subscribe((data:any)=>{
-      this.dataProfile=data.map((element: 
-        { payload: 
-          { doc:
-             { id: any; data: () =>
-              { (): any; new(): any;[x: string]: any; }; 
-            }; 
-          }; 
-        }) =>
-      {
-        element
-        /*if(element.payload.doc.id===this.Uid){*/
-          return{
-            id:element.payload.doc.id,
-            username:element.payload.doc.data()['Username'],
-            Bio:element.payload.doc.data()['Bio'],
-            image:element.payload.doc.data()['image'],
-          }
-        }
-      )
-    })
-  }
+    ngOnInit(): void {
+      this.fs.collection("users").ref.doc(localStorage.getItem("userConnect")).get().then((data:any)=>{
+            console.log(data.data())
+            this.dataProfile.Username=data.data()['Username'],
+            this.dataProfile.image=data.data()['image'],
+            this.dataProfile.Bio=data.data()['Bio'],
+            this.dataProfile.uid=localStorage.getItem("userConnect")
+      })
+    }
+    update(){
+      this.fs.collection("users").doc(this.dataProfile.uid).update({
+        Username:this.dataProfile.Username,
+        Bio:this.dataProfile.Bio
+      }).then(()=>{
+        this.succesMessage="Update !"
+        window.location.reload()
+      })
+    }
 
+    uploadImage( event: any) {
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.fst.ref(id);
+    this.task = this.ref.put(event.target.files[0]);
+    this.percentages = this.task.percentageChanges();
+    this.task.then((data) => {
+      data.ref.getDownloadURL().then(url => {
+        this.fs.collection("users").doc(this.dataProfile.uid).update({
+          image: url
+        });
+      });
+    });
+  }
 }
+

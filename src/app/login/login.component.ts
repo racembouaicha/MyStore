@@ -18,8 +18,9 @@ export class LoginComponent implements OnInit {
   login(f:any){
     let data=f.value
     this.sa.singIn(data.email,data.password)
-    .then(()=>{alert("Login Done")
+    .then((user)=>{alert("Login Done")
     this.route.navigate(['/'])
+    localStorage.setItem("userConnect",user.user.uid)
   })
     .catch(()=>{
      // alert("error")

@@ -4,18 +4,75 @@
         <header class="uk-comment-header">
             <div class="uk-grid-medium uk-flex-middle" uk-grid>
                 <div class="uk-width-auto">
-                    <img class="uk-comment-avatar" src="https://getuikit.com/docs/images/avatar.jpg" width="80" height="200" alt="">
+                    <img class="uk-comment-avatar" [src]="dataProfile.image" width="100" height="200" alt="">
                 </div>
                 <div class="uk-width-expand">
-                    <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Author</a></h4>
+
+                    <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{dataProfile.Username}}</a></h4>
+                    <br>
+                    <button type="button" class="btn btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                        Update
+                      </button>
+
+                    <button type="button" class="btn btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        Update Image
+                      </button>
                     <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Update</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <input class="form-control" type="text" name="Username" [(ngModel)]="dataProfile.Username">
+                                            <input class=" form-control" type="text" name="Bio" [(ngModel)]="dataProfile.Bio">
+                                            <div class="alert alert-success" *ngIf="succesMessage">{{succesMessage}}</div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button class="btn btn-success" (click)="update()">Update Now !</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </ul>
+
                 </div>
             </div>
         </header>
         <div class="uk-comment-body">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-                no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <p>{{dataProfile.Bio}}</p>
         </div>
     </article>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="file" accept=".jpg,.zip" (change)="uploadImage($event)">
+
+                        <div *ngIf="percentages | async as pct">
+                            <div *ngIf="pct == 100" class="alert alert-success">Upload Successfully</div>
+                            <mat-progress-bar *ngIf="pct != 100" mode="indeterminate"></mat-progress-bar>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

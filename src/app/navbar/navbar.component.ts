@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/auth.service';
+
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit ,OnDestroy {
 
   isUser:any
-  constructor(private af:AngularFireAuth,private route:Router,private as:AuthService) { 
-    this.as.user.subscribe(user=>{
+  getUser:Subscription
+  constructor(private af:AngularFireAuth,private route:Router,private as:AuthService ) { 
+    this.getUser=this.as.user.subscribe(user=>{
       if(user){
         this.isUser=true
       }else{
         this.isUser=false
       }
     })
+  }
+  ngOnDestroy(): void {
+    this.getUser.unsubscribe()
   }
 
   ngOnInit(): void {
@@ -27,6 +33,7 @@ export class NavbarComponent implements OnInit {
     this.af.signOut()
     .then(()=>{
       //alert("Logout")
+      localStorage.removeItem("userConnect")
       this.route.navigate(['/login'])
     })
     .catch(()=>{

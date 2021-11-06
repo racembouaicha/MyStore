@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{item.title}}</h5>
                         <p class="card-text">{{item.discription}}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <button class="btn btn-danger" (click)="delete(item.id)">remove</button>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/auth.service';
 
 @Component({
@@ -7,18 +9,20 @@ import { AuthService } from '../Services/auth.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit ,OnDestroy{
     Uid: string
     successMessage=''
     dataArray: any;
-  constructor( private fs:AngularFirestore,private as:AuthService) {
+    getProducts:Subscription
+  constructor( private fs:AngularFirestore,private as:AuthService ,private route:Router) {
     this.as.user.subscribe(user=>{
       this.Uid=user.uid
     })
    }
+ 
 
    ngOnInit(): void {
-    this.fs.collection("products").snapshotChanges().subscribe((data:any)=>{
+    this.getProducts=this.fs.collection("products").snapshotChanges().subscribe((data:any)=>{
      this.dataArray= data.map((element: { payload: { doc: { id: any; data: () => { (): any; new(): any;[x: string]: any; }; }; }; })=>{
         return{
           id:element.payload.doc.id,
@@ -29,6 +33,13 @@ export class ProductsComponent implements OnInit {
         }
       })
     })
+  }
+  detail(id: string){
+    this.route.navigate(['/product/'+id])
+   
+  }
+  ngOnDestroy(): void {
+    this.getProducts.unsubscribe()
   }
 
 }
