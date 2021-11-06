@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import firebase from 'firebase';
 import { AuthService } from '../Services/auth.service';
 
 
@@ -10,7 +12,7 @@ import { AuthService } from '../Services/auth.service';
 })
 export class LoginComponent implements OnInit {
   messageError=''
-  constructor(private sa:AuthService,private route:Router) { }
+  constructor(private sa:AuthService,private route:Router,public afAuth:AngularFireAuth) { }
 
   ngOnInit(): void {
   }
@@ -27,4 +29,6 @@ export class LoginComponent implements OnInit {
       this.messageError='incorrect Email or Password'
   })
   }
+
+ 
 }

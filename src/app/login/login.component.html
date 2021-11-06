@@ -1,26 +1,36 @@
-<div class="uk-position-center uk-overlay uk-overlay-default">
-    <h1 class="text-center">Log In</h1>
-    <form #f="ngForm" (ngSubmit)="login(f)">
+<div class="container">
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <form #f="ngForm" (ngSubmit)="login(f)">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Email address</label>
+                            <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
+                            <input class="form-control form-control-lg" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
+                        </div>
 
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
-                <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                <input class="uk-input" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
+                        <!-- Password input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="form3Example4">Password</label>
+                            <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
+                            <input class="form-control form-control-lg" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <div class="alert alert-danger" *ngIf="messageError">{{messageError}}</div>
+                            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
 
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
-                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                <input class="uk-input" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-success" style="width: 100%;">Login</button>
-        <div class="alert alert-danger" *ngIf="messageError">{{messageError}}</div>
-        <p class="text-center">Forget <a href="#">password ?</a></p>
-    </form>
-
-
+    </section>
 </div>
