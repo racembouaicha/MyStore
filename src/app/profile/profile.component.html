@@ -4,18 +4,17 @@
         <header class="uk-comment-header">
             <div class="uk-grid-medium uk-flex-middle" uk-grid>
                 <div class="uk-width-auto">
-                    <img class="uk-comment-avatar" [src]="dataProfile.image" width="100" height="200" alt="">
+                    <img class="uk-comment-avatar" [src]="dataProfile.image" width="100" height="200" alt="" style="border-radius: 50%;">
                 </div>
                 <div class="uk-width-expand">
 
                     <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">{{dataProfile.Username}}</a></h4>
                     <br>
-                    <button type="button" class="btn btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                        Update
-                      </button>
-
-                    <button type="button" class="btn btn-success" aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        Update Image
+                    <button type="button" class="btn btn-info" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                        Update Profile
+                      </button> &nbsp;
+                    <button type="button" class="btn btn-info" aria-current="page" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        Change Photo
                       </button>
                     <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
 

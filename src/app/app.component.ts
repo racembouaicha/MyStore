@@ -1,10 +1,14 @@
+import { query, style, transition, trigger ,group, animate } from '@angular/animations';
 import { Component } from '@angular/core';
-import {Event, Router , NavigationStart ,NavigationEnd } from '@angular/router';
+import {Event, Router , NavigationStart ,NavigationEnd, RouterOutlet } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'], 
 })
 export class AppComponent {
   title = 'MyStore';
@@ -19,5 +23,8 @@ export class AppComponent {
           this.showLoadingIndicator =false; 
           }  
     })
+  }
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'];
   }
 }

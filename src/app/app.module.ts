@@ -18,7 +18,8 @@ import { MyProductsComponent } from './my-products/my-products.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DetailsProductComponent } from './details-product/details-product.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+
+
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ProductsComponent,
     MyProductsComponent,
     DetailsProductComponent,
-    NotFoundComponent
+   
   ],
   imports: [
     BrowserModule,

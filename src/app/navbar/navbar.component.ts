@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../Services/auth.service';
@@ -11,10 +12,15 @@ import { AuthService } from '../Services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit ,OnDestroy {
-
+  dataProfile ={
+    Username:'',
+    image:'',
+    Bio:'',
+    uid:'',
+  }
   isUser:any
   getUser:Subscription
-  constructor(private af:AngularFireAuth,private route:Router,private as:AuthService ) { 
+  constructor(private af:AngularFireAuth,private route:Router,private as:AuthService,private fs:AngularFirestore ) { 
     this.getUser=this.as.user.subscribe(user=>{
       if(user){
         this.isUser=true
@@ -28,6 +34,12 @@ export class NavbarComponent implements OnInit ,OnDestroy {
   }
 
   ngOnInit(): void {
+    this.fs.collection("users").ref.doc(localStorage.getItem("userConnect")).get().then((data:any)=>{
+      console.log(data.data())
+      this.dataProfile.Username=data.data()['Username'],
+      this.dataProfile.image=data.data()['image'],
+      this.dataProfile.uid=localStorage.getItem("userConnect")
+})
   }
   logout(){
     this.af.signOut()

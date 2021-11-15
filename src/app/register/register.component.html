@@ -1,94 +1,63 @@
-<<!--div class="uk-position-center uk-overlay uk-overlay-default">
-    <h1 class="text-center">Register</h1>
-    <form #f="ngForm" (ngSubmit)="register(f)">
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <p class="alert alert-danger" *ngIf="Username.errors?.required && Username.touched">Please Enter your Username</p>
-                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>
-                <input class="uk-input" type="text" placeholder="Username" name="Username" #Username="ngModel" ngModel required>
-            </div>
-        </div>
+<div class="container">
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <form #f="ngForm" (ngSubmit)="register(f)">
+                        <!-- Username input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Username</label>
+                            <p class="alert alert-danger" *ngIf="Username.errors?.required && Username.touched">Please Enter your Username</p>
+                            <input class="form-control form-control-lg" type="text" placeholder="Username" name="Username" #Username="ngModel" ngModel required>
+                        </div>
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">E-mail</label>
+                            <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
+                            <input class="form-control form-control-lg" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
+                        </div>
+                        <!-- Bio input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="form3Example3">Bio</label>
+                            <p class="alert alert-danger" *ngIf="Bio.errors?.required && Bio.touched">Please Enter your Bio</p>
+                            <textarea class="form-control form-control-lg" placeholder="Bio" cols="23" rows="3" name="Bio" #Bio="ngModel" ngModel required></textarea>
+                        </div>
 
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <p class="alert alert-danger" *ngIf="Bio.errors?.required && Bio.touched">Please Enter your Bio</p>
-                <span class="uk-form-icon" uk-icon="icon:  file-edit"></span>
-                <textarea class="uk-input" placeholder="Bio" cols="23" rows="10" name="Bio" #Bio="ngModel" ngModel required></textarea>
-            </div>
-        </div>
+                        <!-- Password input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="form3Example4">Password</label>
+                            <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
+                            <input class="form-control form-control-lg" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
+                        </div>
+                        <!-- Confirm Password input -->
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="form3Example4">Confirm Password</label>
+                            <p *ngIf="confirmpsw.errors?.required && confirmpsw.errors?.minlength && confirmpsw.touched" class="alert alert-danger">Please enter your password</p>
+                            <p *ngIf="password.value!==confirmpsw.value && confirmpsw.touched" class="alert alert-danger">password is not correct</p>
+                            <input class="form-control form-control-lg" type="password" #confirmpsw="ngModel" ngModel placeholder="Mot de passe" name="confirmpsw" required minlength="6">
+                        </div>
 
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
-                <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: mail"></span>
-                <input class="uk-input" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
-            </div>
-        </div>
+                        <div class="text-center text-lg-start mt-4 pt-2">
 
-        <div class="uk-margin">
-            <div class="uk-inline">
-                <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
-                <span class="uk-form-icon " uk-icon="icon: lock"></span>
-                <input class="uk-input" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
-            </div>
-        </div>
-        <button class="btn btn-success" type="submit" style="width: 100%;">Register</button>
+                            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="f.invalid">Login</button>
 
-    </form>
-    </div>-->
-
-    <div class="container">
-        <section class="vh-100">
-            <div class="container-fluid h-custom">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div class="col-md-9 col-lg-6 col-xl-5">
-                        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid" alt="Sample image">
-                    </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                        <form #f="ngForm" (ngSubmit)="register(f)">
-                            <!-- Username input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Username</label>
-                                <p class="alert alert-danger" *ngIf="Username.errors?.required && Username.touched">Please Enter your Username</p>
-                                <input class="form-control form-control-lg" type="text" placeholder="Username" name="Username" #Username="ngModel" ngModel required>
-                            </div>
-                            <!-- Email input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">E-mail</label>
-                                <p class="alert alert-danger" *ngIf="email.errors?.required && email.touched">Please Enter your E-mail</p>
-                                <input class="form-control form-control-lg" type="email" placeholder="E-mail" name="email" #email="ngModel" ngModel required>
-                            </div>
-                            <!-- Bio input -->
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form3Example3">Bio</label>
-                                <p class="alert alert-danger" *ngIf="Bio.errors?.required && Bio.touched">Please Enter your Bio</p>
-                                <textarea class="form-control form-control-lg" placeholder="Bio" cols="23" rows="3" name="Bio" #Bio="ngModel" ngModel required></textarea>
-                            </div>
-
-                            <!-- Password input -->
-                            <div class="form-outline mb-3">
-                                <label class="form-label" for="form3Example4">Password</label>
-                                <p class="alert alert-danger" *ngIf="password.errors?.required && password.touched">Please Enter your Password</p>
-                                <input class="form-control form-control-lg" type="password" placeholder="Password" name="password" #password="ngModel" ngModel required>
-                            </div>
-                            <!-- Confirm Password input -->
-                            <div class="form-outline mb-3">
-                                <label class="form-label" for="form3Example4">Confirm Password</label>
-                                <p *ngIf="confirmpsw.errors?.required && confirmpsw.errors?.minlength && confirmpsw.touched" class="alert alert-danger">Please enter your password</p>
-                                <p *ngIf="password.value!==confirmpsw.value && confirmpsw.touched" class="alert alert-danger">password is not correct</p>
-                                <input class="form-control form-control-lg" type="password" #confirmpsw="ngModel" ngModel placeholder="Mot de passe" name="confirmpsw" required minlength="6">
-                            </div>
-
-                            <div class="text-center text-lg-start mt-4 pt-2">
-
-                                <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="f.invalid">Login</button>
-
-                            </div>
-
-                        </form>
-                    </div>
+                        </div>
+                        <div>
+                            <h3>Or connect with:</h3>
+                            <br>
+                            <button (click)="signinWithGoogle()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                                <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+                              </svg>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-        </section>
-    </div>
+    </section>
+</div>

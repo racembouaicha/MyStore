@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import firebase from 'firebase';
 import { AuthService } from '../Services/auth.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { AuthService } from '../Services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private sa:AuthService,private route:Router,private fs:AngularFirestore) { }
+  constructor(private sa:AuthService,private route:Router,private fs:AngularFirestore,public afAuth:AngularFireAuth) { }
 
   ngOnInit(): void {
   }
@@ -19,6 +21,7 @@ export class RegisterComponent implements OnInit {
    let data=f.value
     
     this.sa.signUp(data.email,data.password).then((user)=>{
+      localStorage.setItem("userConnect",user.user.uid)
       alert("Registration Done")
       this.fs.collection("users").doc(user.user.uid).set({
         Username:data.Username,
@@ -34,4 +37,17 @@ export class RegisterComponent implements OnInit {
       console.log("error")
     })
   }
-}
+
+  signinWithGoogle(){
+    const googleAuthProvider =new firebase.auth.GoogleAuthProvider();
+    this.afAuth.signInWithPopup(googleAuthProvider).then((user)=>{
+      this.fs.collection("users").doc(user.user.uid).set({
+      uid:user.user.uid,
+      Username:user.user.displayName,
+      email:user.user.email,
+      image:user.user.photoURL,
+      }
+    );
+    
+  }
+    )}}
