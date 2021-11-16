@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
    let data=f.value
     
     this.sa.signUp(data.email,data.password).then((user)=>{
-      localStorage.setItem("userConnect",user.user.uid)
+      localStorage.setItem("userConnect",user.user.uid)//permet de sauvgarder le uid dans le localStorage dans un variable userConnect
       alert("Registration Done")
       this.fs.collection("users").doc(user.user.uid).set({
         Username:data.Username,

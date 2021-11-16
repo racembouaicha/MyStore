@@ -1,14 +1,16 @@
 <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <img class="navbar-brand" src="https://logos-marques.com/wp-content/uploads/2021/03/Apple-logo.png" width="50" height="50">
 
-        <div class="container-fluid">
-            <a class="navbar-brand" *ngIf="!isUser">logo</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                   <span class="navbar-toggler-icon"></span>
-                </button>
+            </button>
+
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
                     </li>
@@ -28,34 +30,37 @@
                         <a class="nav-link active" aria-current="page" routerLink="myproducts">My Products</a>
                     </li>
                     <li class="nav-item" *ngIf="isUser">
-                        <button type="button" class="btn btn-danger" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button class="btn btn-danger" aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="submit">
                             logout
                           </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Logout</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure for Lougout !
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </li>
                 </ul>
 
+            </div>
+            <div class="d-flex">
                 <h2 *ngIf="isUser">Hello ,{{dataProfile.Username}} !</h2>&nbsp;
                 <img class="uk-comment-avatar" *ngIf="isUser" [src]="dataProfile.image" width="50" height="50" alt="" style="border-radius: 50%;">
+            </div>
+        </nav>
+    </div>
 
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure for Lougout !
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
             </div>
         </div>
-    </nav>
+    </div>
 </div>

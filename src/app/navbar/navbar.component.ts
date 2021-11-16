@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit ,OnDestroy {
   }
 
   ngOnInit(): void {
+    //userConnect c'est un variable contenant le valeur uid d'apres le page login 
     this.fs.collection("users").ref.doc(localStorage.getItem("userConnect")).get().then((data:any)=>{
       console.log(data.data())
       this.dataProfile.Username=data.data()['Username'],

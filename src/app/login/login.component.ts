@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   signinWithGoogle(){
     const googleAuthProvider =new firebase.auth.GoogleAuthProvider();
     this.afAuth.signInWithPopup(googleAuthProvider).then((user)=>{
-      localStorage.setItem("userConnect",user.user.uid)
+      localStorage.setItem("userConnect",user.user.uid)//permet de sauvgarder le uid dans le localStorage dans un variable userConnect
       this.fs.collection("users").doc(user.user.uid).set({
       uid:user.user.uid,
       Username:user.user.displayName,

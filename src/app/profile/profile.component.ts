@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
     this.percentages = this.task.percentageChanges();
     this.task.then((data) => {
       data.ref.getDownloadURL().then(url => {
-        this.fs.collection("users").doc(this.dataProfile.uid).update({
+        this.fs.collection("users").doc(this.Uid).update({
           image: url
         });
       });
